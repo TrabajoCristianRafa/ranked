@@ -7,11 +7,11 @@ const ROLE_GUEST = 'GUEST'
 const userSchema = new mongoose.Schema({
   linkedinFirstName: {
     type: String,
-    required: [true, 'User is required']
+    // required: [true, 'User is required']
   },
   linkedinId: {
     type: String,
-    required: [true, 'LinkedinId is requiried']
+    // required: [true, 'LinkedinId is requiried']
   },
   interests: {
     enum: ['Bitcoin', 'Javascript'],
