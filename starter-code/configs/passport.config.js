@@ -1,3 +1,7 @@
+// REVISAR, HE INTRODUCIDO MI KEY Y SECRET // 
+
+
+
 const User = require('../models/user.model');
 const LinkedinStrategy = require('passport-linkedin').Strategy;
 
@@ -14,7 +18,6 @@ module.exports.setup = (passport) => {
     next(null, user._id);
   })
 
-
   passport.deserializeUser((id, next) => {
     User.findById(id)
       .then(user => {
@@ -24,8 +27,8 @@ module.exports.setup = (passport) => {
   })
 
   passport.use(new LinkedinStrategy({
-      consumerKey: LINKEDIN_CLIENT_ID,
-      consumerSecret: LINKEDIN_CLIENT_SECRET,
+      consumerKey: '78frd5p2p2moyo',
+      consumerSecret: 'E2CNvuddqixrfDMy',
       callbackURL: LINKEDIN_CB_URL
     },
     function(token, tokenSecret, profile, done) {
