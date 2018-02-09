@@ -29,7 +29,9 @@ userSchema.pre('save', function(next) {
   if (user.isAdmin()) {
     user.role = 'ADMIN'
   }
-
+  console.log('Imprimo user dentro del modelo en pre =>')
+  console.log(user)
+  next();
 })
 
 userSchema.methods.isAdmin = function() {

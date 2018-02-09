@@ -33,35 +33,37 @@ module.exports.setup = (passport) => {
     },
     function(req, accessToken, refreshToken, profile, done) {
       req.session.accessToken = accessToken;
-      console.log(accessToken)
+      // console.log(accessToken)
       process.nextTick(function() {
-        console.log(profile)
-        console.log("He llegado a Linkedin")
-        User.findOne()
+        // console.log(profile)
+        // console.log("He llegado a Linkedin")
+        User.findOne({'linkedinId': profile.id})
           .then(user => {
             if (user) {
-              console.log("Encima", user)
-              next(null, user);
-              console.log("debajo")
+              console.log('El usuario existe')
+              // next(null, user);
             } else {
-              console.log("Aqui tengo que crear un usuario")
+              // console.log("Aqui tengo que crear un usuario")
               // const email = profile.emails ? profile.emails[0].value : null;
-              const newUser = new User({
-                linkedinFirstName: profile.firstName || DEFAULT_USERNAME,
-                // password: Math.random().toString(36).slice(-8), // FIXME: insecure, use secure random seed
-              });
+              const userData = {
+                linkedinFirstName: profile.firstName,
+                linkedinId: profile.id
+              }
+              const newUser = new User(userData);
+              console.log('imprimo newUser =>')
               console.log(newUser)
               newUser.save()
-                .then(() => {
-                  console.log("entro a save")
-                  next(null, user);
+                .then((user) => {
+                  done(null, profile);
                 })
-                .catch(error => next(error));
+                .catch(error => {
+                  next(error)
+                });
             }
           })
           .catch(error => next(error));
 
-        return done(null, profile);
+
       });
     })
   )

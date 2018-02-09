@@ -15,13 +15,13 @@ module.exports.loginWithProviderCallback = (req, res, next) => {
       if(error) {
           next(error);
       } else {
-        req.login(user, (error) => {
-          if (error) {
-            next(error);
-          } else {
+        // req.login(user, (error) => {
+        //   if (error) {
+        //     next(error);
+        //   } else {
             res.redirect('profile');
-          }
-        });
+        //   }
+        // });
       }
     })(req, res, next);
 }
