@@ -1,0 +1,26 @@
+<%  let string = session.linkedinName %>
+  <%  string = string.split(" "); %>
+    <% let stringArray = new Array();%>
+      <% for(let i =0; i < string.length; i++){%>
+        <%    stringArray.push(string[i]);%>
+          <%    if(i != string.length-1){%>
+            <%        stringArray.push(" ");%>
+              <%    }%>
+                <%}%>
+                  <%console.log(stringArray) %>
+
+                    <h3><%= string[0] %>'s interests'! <%= session.interests[0] %></h3>
+
+                    <form action='/<%= session._id%>' method="post">
+
+                      <script type="text/javascript" src="/javascripts/index.js">>
+                      checkedInterest()
+                      </script>
+
+          <% interestTypes.forEach((interest) => {%>
+            <input type="checkbox" name="interest" value="<%= interest %>"
+              <%= session.interests[0] === interest ? 'checked' : ''  %>>I like <%= interest %><br>
+          <% })%>
+          
+          <input type="submit" value="Submit">
+          </form>

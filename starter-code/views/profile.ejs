@@ -1,1 +1,25 @@
-Soy un profile
+<%  let string = session.linkedinName %>
+  <%  console.log(session) %>
+    <%  string = string.split(" "); %>
+      <% let stringArray = new Array();%>
+        <% for(let i =0; i < string.length; i++){%>
+          <%    stringArray.push(string[i]);%>
+            <%    if(i != string.length-1){%>
+              <%        stringArray.push(" ");%>
+                <%    }%>
+                  <%}%>
+                    <%console.log(stringArray) %>
+
+                      <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                          <%  if (session.interests === undefined){%>
+                            <!-- NUEVO USUARIO, MENSAJE-->
+                              <h3>Welcome <%= string[0] %>, Select your favourite topic and start posting! </h3>
+                              <% } else {%>
+                                <!-- VIEJO USUARIO, MENSAJE-->
+                                  <h3>Welcome back <%= string[0] %>, you selected <%= session.interests %> as your favourite topic, Wanna keep it? </h3>
+                                  <a href='/<%= session._id%>/edit'>Update your interests 'NO'</a> <br>
+                                  <a href='/<%= session._id%>/edit'>Post the rank of your favourite topic 'YES'</a>
+                                  <%}%>
+                        </div>
+                      </div>
