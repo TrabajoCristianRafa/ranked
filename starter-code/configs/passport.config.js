@@ -34,10 +34,14 @@ module.exports.setup = (passport) => {
       req.session.accessToken = accessToken;
       process.nextTick(function() {
         console.log(profile)
-        User.findOne({'linkedinId': profile.id})
+        User.findOne({
+            'linkedinId': profile.id
+          })
           .then(user => {
             if (user) {
-              console.log('El usuario existe')
+
+              console.log('El usuario existe');
+              done(null, user);
             } else {
               const newUser = new User();
               newUser.linkedinName = profile.displayName;
@@ -49,12 +53,11 @@ module.exports.setup = (passport) => {
                   done(null, user);
                 })
                 .catch(error => {
-                  next(error)
+                  done(error)
                 });
             }
           })
-          .catch(error => next(error));
+          .catch(error => done(error));
       });
-    })
-  )
+    }))
 }
