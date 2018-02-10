@@ -3,3 +3,7 @@ module.exports.index = (req, res, next) => {
     title: "Ranked"
   })
 }
+
+module.exports.profile = (req, res, next) => {
+    res.render('profile');
+}

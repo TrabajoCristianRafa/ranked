@@ -5,7 +5,7 @@ const DEFAULT_USERNAME = 'anonymous ironhacker'
 
 const LINKEDIN_CLIENT_ID = process.env.LINKEDIN_CLIENT_ID || '';
 const LINKEDIN_CLIENT_SECRET = process.env.LINKEDIN_CLIENT_SECRET || '';
-// const LINKEDIN_CB_URL = '/auth/linkedin/cb'
+
 
 const LINKEDIN_PROVIDER = 'linkedin';
 
@@ -24,7 +24,6 @@ module.exports.setup = (passport) => {
   })
 
   passport.use('linkedin-auth', new LinkedInStrategy({
-      //ESTAS VARIABLES VAN AL ENV //
       clientID: '78frd5p2p2moyo',
       clientSecret: 'E2CNvuddqixrfDMy',
       callbackURL: "http://127.0.0.1:3000/auth/linkedin/callback",
@@ -33,28 +32,21 @@ module.exports.setup = (passport) => {
     },
     function(req, accessToken, refreshToken, profile, done) {
       req.session.accessToken = accessToken;
-      // console.log(accessToken)
       process.nextTick(function() {
-        // console.log(profile)
-        // console.log("He llegado a Linkedin")
+        console.log(profile)
         User.findOne({'linkedinId': profile.id})
           .then(user => {
             if (user) {
               console.log('El usuario existe')
-              // next(null, user);
             } else {
-              // console.log("Aqui tengo que crear un usuario")
-              // const email = profile.emails ? profile.emails[0].value : null;
-              const userData = {
-                linkedinFirstName: profile.firstName,
-                linkedinId: profile.id
-              }
-              const newUser = new User(userData);
+              const newUser = new User();
+              newUser.linkedinName = profile.displayName;
+              newUser.linkedinId = profile.id;
               console.log('imprimo newUser =>')
               console.log(newUser)
               newUser.save()
                 .then((user) => {
-                  done(null, profile);
+                  done(null, user);
                 })
                 .catch(error => {
                   next(error)
@@ -62,8 +54,6 @@ module.exports.setup = (passport) => {
             }
           })
           .catch(error => next(error));
-
-
       });
     })
   )

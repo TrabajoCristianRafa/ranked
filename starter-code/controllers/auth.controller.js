@@ -7,7 +7,6 @@ module.exports.signup = (req, res, next) => {
   res.render('signup')
 }
 
-// REVISAR ESTE LINKEDIN //
 module.exports.loginWithProviderCallback = (req, res, next) => {
   console.log('IMPRIMO REQ.PARAMS =>  ')
   console.log(req.query);
@@ -15,13 +14,13 @@ module.exports.loginWithProviderCallback = (req, res, next) => {
       if(error) {
           next(error);
       } else {
-        // req.login(user, (error) => {
-        //   if (error) {
-        //     next(error);
-        //   } else {
+        req.login(user, (error) => {
+          if (error) {
+            next(error);
+          } else {
             res.redirect('profile');
-        //   }
-        // });
+          }
+        });
       }
     })(req, res, next);
 }

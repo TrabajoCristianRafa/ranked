@@ -5,7 +5,7 @@ const ROLE_ADMIN = 'ADMIN'
 const ROLE_GUEST = 'GUEST'
 
 const userSchema = new mongoose.Schema({
-  linkedinFirstName: {
+  linkedinName: {
     type: String,
     // required: [true, 'User is required']
   },
@@ -22,17 +22,17 @@ const userSchema = new mongoose.Schema({
     default: ROLE_GUEST
   }
 })
-
-userSchema.pre('save', function(next) {
-  const user = this;
-
-  if (user.isAdmin()) {
-    user.role = 'ADMIN'
-  }
-  console.log('Imprimo user dentro del modelo en pre =>')
-  console.log(user)
-  next();
-})
+//
+// userSchema.pre('save', function(next) {
+//   const user = this;
+//
+//   if (user.isAdmin()) {
+//     user.role = 'ADMIN'
+//   }
+//   console.log('Imprimo user dentro del modelo en pre')
+//   console.log(user)
+//   next();
+// })
 
 userSchema.methods.isAdmin = function() {
   return this.linkedinFirstName === 'Ranked Project' || this.role === ROLE_ADMIN
