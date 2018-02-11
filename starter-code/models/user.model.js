@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+const INTEREST_TYPES = require('./interest-types.js');
 const FIRST_ADMIN = 'Ranked Project'
 const ROLE_ADMIN = 'ADMIN'
 const ROLE_GUEST = 'GUEST'
@@ -13,8 +14,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     // required: [true, 'LinkedinId is requiried']
   },
-  interests: {
-    enum: ['Bitcoin', 'Javascript'],
+  interest: {
+    type: String,
+    enum: [INTEREST_TYPES],
   },
   role: {
     type: String,
@@ -22,17 +24,17 @@ const userSchema = new mongoose.Schema({
     default: ROLE_GUEST
   }
 })
-//
-// userSchema.pre('save', function(next) {
-//   const user = this;
-//
-//   if (user.isAdmin()) {
-//     user.role = 'ADMIN'
-//   }
-//   console.log('Imprimo user dentro del modelo en pre')
-//   console.log(user)
-//   next();
-// })
+
+userSchema.pre('save', function(next) {
+  const user = this;
+
+  if (user.isAdmin()) {
+    user.role = 'ADMIN'
+  }
+  console.log('Imprimo user dentro del modelo en pre')
+  console.log(user)
+  next();
+})
 
 userSchema.methods.isAdmin = function() {
   return this.linkedinFirstName === 'Ranked Project' || this.role === ROLE_ADMIN

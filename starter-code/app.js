@@ -16,6 +16,7 @@ require('./configs/passport.config').setup(passport);
 
 const index = require('./routes/index.routes');
 const auth = require('./routes/auth.routes');
+// const admin = require('./routes/admin.routes');
 // const users = require('./routes/users');
 
 const app = express();
@@ -50,8 +51,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+  res.locals.session = req.user;
+  next();
+})
+
 app.use('/', index);
 app.use('/', auth);
+// app.use('/', admin);
+
 // app.use('/users', users);
 
 // catch 404 and forward to error handler
