@@ -12,16 +12,21 @@
 
                       <div class="row">
                         <div class="col-xs-12 col-sm-6 col-sm-offset-3">
-                          <%  if (session.interests === undefined){%>
+                          <%  if (session.interest === undefined){%>
                             <!-- NUEVO USUARIO, MENSAJE-->
                               <h3>Welcome <%= string[0] %>, Select your favourite topic and start posting! </h3>
+                              <form action='/<%= session._id%>' method='post'>
                               <input type="radio" name="interest" value="Bitcoin">I like Bitcoin<br>
                                 <input type="radio" name="interest" value="Seo">I like Seo<br>
+                                <input type="submit" value="Submit">
+                                </form>
                               <% } else {%>
                                 <!-- VIEJO USUARIO, MENSAJE-->
-                                  <h3>Welcome back <%= string[0] %>, you selected <%= session.interests %> as your favourite topic, Wanna keep it? </h3>
+                                  <h3>Welcome back <%= string[0] %>, you selected <%= session.interest %> as your favourite topic, Wanna keep it? </h3>
                                   <a href='/<%= session._id%>/edit'>Update your interests 'NO'</a> <br>
-                                  <a href='/<%= session._id%>/edit'>Post the rank of your favourite topic 'YES'</a>
+                                  <a href='/<%= session._id%>/news'>See the ranking of your favourite topic 'YES'</a>
+
                                   <%}%>
+
                         </div>
                       </div>

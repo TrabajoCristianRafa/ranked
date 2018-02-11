@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     // required: [true, 'LinkedinId is requiried']
   },
-  interests: {
+  interest: {
     type: String,
     enum: [INTEREST_TYPES],
   },

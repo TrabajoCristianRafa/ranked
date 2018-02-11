@@ -6,6 +6,7 @@ router.get('/', indexControllers.index)
 router.get('/auth/linkedin/profile', indexControllers.profile)
 router.get('/:id/edit', indexControllers.updateInterests);
 router.post('/:id', indexControllers.doUpdateInterests);
+router.get('/:id/news', indexControllers.showNews);
 
 
 module.exports = router;

@@ -1,4 +1,6 @@
 const INTEREST_TYPES = require('../models/interest-types');
+const mongoose = require('mongoose');
+const User = require('../models/user.model');
 
 module.exports.index = (req, res, next) => {
   res.render('index', {
@@ -18,13 +20,21 @@ module.exports.updateInterests = (req, res, next) => {
 }
 
 module.exports.doUpdateInterests = (req, res, next) => {
-  console.log(req.params)
-  console.log(req.body)
-  let userInterests = req.body
-  let userId = req.params.id
-  if (Object.keys(userInterests).length === 0) {
+  if (Object.keys(req.body).length === 0) {
     console.log("el usuario no tiene gustos, por favor eligelos")
+    // Añadir un campo para resaltar que elija un interés
   } else {
     console.log("Al usuario le gusta algo")
+    User.findByIdAndUpdate({ _id: req.params.id}, {interest: req.body.interest})
+      .then(() => {
+        console.log("user")
+        res.redirect('/' + req.params.id + '/news')
+      })
+
   }
+}
+
+
+module.exports.showNews = (req, res, next) => {
+  res.render('news');
 }
