@@ -14,11 +14,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     // required: [true, 'LinkedinId is requiried']
   },
-  interests: [{
+  interests: {
     type: String,
-    enum: INTEREST_TYPES,
-
-  }],
+    enum: [INTEREST_TYPES],
+  },
   role: {
     type: String,
     enum: [ROLE_GUEST, ROLE_ADMIN],

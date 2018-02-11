@@ -9,18 +9,16 @@
                 <%}%>
                   <%console.log(stringArray) %>
 
-                    <h3><%= string[0] %>'s interests'! <%= session.interests[0] %></h3>
+                    <h3><%= string[0] %>'s interests'! <%= session.interests %></h3>
 
                     <form action='/<%= session._id%>' method="post">
 
-                      <script type="text/javascript" src="/javascripts/index.js">>
-                      checkedInterest()
-                      </script>
 
           <% interestTypes.forEach((interest) => {%>
-            <input type="checkbox" name="interest" value="<%= interest %>"
-              <%= session.interests[0] === interest ? 'checked' : ''  %>>I like <%= interest %><br>
+            <%  console.log(session)%>
+            <input type="radio" name="interest" value="<%= interest %>"
+              <%= session.interests === interest ? 'checked' : ''  %>>I like <%= interest %><br>
           <% })%>
-          
+
           <input type="submit" value="Submit">
           </form>

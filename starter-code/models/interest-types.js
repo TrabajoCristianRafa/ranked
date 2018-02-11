@@ -1,5 +1,5 @@
 
 module.exports = [
   "Bitcoin",
-  "Seo"
+  "Seo",
 ]
