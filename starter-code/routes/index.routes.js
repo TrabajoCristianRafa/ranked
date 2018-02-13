@@ -1,12 +1,17 @@
-const express = require('express');
-const router = express.Router();
-const indexControllers = require('../controllers/index.controller')
+const router = require('express').Router();
+
+const index = require('./index.routes');
+const auth = require('./auth.routes');
+const admin = require('./admin.routes');
+const user = require('./user.routes');
+
+const indexControllers = require('../controllers/index.controller');
+
+router.use('/admin', admin);
+router.use('/auth', auth);
+router.use('/user', user);
 
 router.get('/', indexControllers.index)
-router.get('/auth/linkedin/profile', indexControllers.profile)
-router.get('/:id/edit', indexControllers.updateInterests);
-router.post('/:id', indexControllers.doUpdateInterests);
-router.get('/:id/news', indexControllers.showNews);
 
 
 module.exports = router;

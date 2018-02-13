@@ -9,6 +9,9 @@ const newsSchema = new mongoose.Schema({
     type: Number,
     // required: [true, 'LinkedinId is requiried']
   },
+  url: {
+    type: String,
+  },
   comment: {
     type: String,
   }

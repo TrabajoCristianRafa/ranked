@@ -23,22 +23,43 @@ const userSchema = new mongoose.Schema({
     enum: [ROLE_GUEST, ROLE_ADMIN],
     default: ROLE_GUEST
   }
-})
-
-userSchema.pre('save', function(next) {
-  const user = this;
-
-  if (user.isAdmin()) {
-    user.role = 'ADMIN'
+}, {
+  toObject: {
+    virtuals: true
+  },
+  toJSON: {
+    virtuals: true
   }
-  console.log('Imprimo user dentro del modelo en pre')
-  console.log(user)
-  next();
 })
 
-userSchema.methods.isAdmin = function() {
-  return this.linkedinFirstName === 'Ranked Project' || this.role === ROLE_ADMIN
-}
+userSchema.virtual('userFirstName').get(function() {
+  var split = this.linkedinName.split(' ');
+  return split[0];
+  console.log(split)
+});
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
+
+
+
+
+
+
+
+
+
+// userSchema.pre('save', function(next) {
+//   const user = this;
+//
+//   if (user.isAdmin()) {
+//     user.role = 'ADMIN'
+//   }
+//   console.log('Imprimo user dentro del modelo en pre')
+//   console.log(user)
+//   next();
+// })
+//
+// userSchema.methods.isAdmin = function() {
+//   return this.linkedinFirstName === 'Ranked Project' || this.role === ROLE_ADMIN
+// }

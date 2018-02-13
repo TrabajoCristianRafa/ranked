@@ -2,9 +2,11 @@ const mongoose = require('mongoose');
 const User = require('../models/user.model');
 const passport = require('passport');
 
+module.exports.profile = (req, res, next) => {
+  res.render('profile');
+}
+
 module.exports.loginWithProviderCallback = (req, res, next) => {
-  console.log('IMPRIMO REQ.PARAMS =>  ')
-  console.log(req.query);
     passport.authenticate('linkedin-auth', (error, user) => {
       if(error) {
           next(error);
