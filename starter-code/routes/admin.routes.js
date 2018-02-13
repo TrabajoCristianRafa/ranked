@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const adminControllers = require('../controllers/admin.controller');
+const adminCheck = require('../middleware/admin.middleware');
 
 
-router.get('/admin', adminControllers.adminHome);
-router.post('/hola', adminControllers.uploadNews);
+router.get('/', adminCheck.isAdmin , adminControllers.adminHome);
+router.post('/', adminCheck.isAdmin, adminControllers.uploadNews);
 
 module.exports = router;

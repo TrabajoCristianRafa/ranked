@@ -9,6 +9,17 @@ module.exports.adminHome = (req, res, next) => {
 }
 
 module.exports.uploadNews = (req, res, next) => {
-  console.log("Hola, estoy en uploadNews")
-  console.log(req.body)
+  const lastNews = new News();
+  lastNews.userName = req.body.userName;
+  lastNews.retweet = req.body.retweet;
+  lastNews.url = req.body.url;
+  lastNews.comment = req.body.comment;
+  lastNews.save()
+    .then((news) => {
+      next(null, news)
+    })
+    .catch(error => {
+      next(error)
+    })
+    res.redirect('admin')
 }
