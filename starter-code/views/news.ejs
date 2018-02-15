@@ -1,1 +1,4 @@
-I'm a view with NEWS
+<% news.forEach(function(singleNew) { %>
+  <h2> <%= singleNew.comment %> </h2>
+  <h2> <%= singleNew.url %> </h2>
+<% }) %>
