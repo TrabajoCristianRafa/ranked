@@ -14,6 +14,7 @@ module.exports.uploadNews = (req, res, next) => {
   lastNews.retweet = req.body.retweet;
   lastNews.url = req.body.url;
   lastNews.comment = req.body.comment;
+  lastNews.topic = req.body.topic;
   lastNews.save()
     .then((news) => {
       next(null, news)
