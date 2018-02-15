@@ -12,6 +12,9 @@ const newsSchema = new mongoose.Schema({
   url: {
     type: String,
   },
+  sentimentScore: {
+    type: Number,
+  },
   topic: {
     type: String,
   },
