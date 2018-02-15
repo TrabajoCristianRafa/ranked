@@ -10,11 +10,19 @@
       </form>
       <% } else {%>
         <!-- VIEJO USUARIO, MENSAJE-->
+        <% if(session.role !== 'ADMIN') {%>
         <h3>Welcome back <%= session.userFirstName %>, you selected <%= session.interest %> as your favourite topic, Wanna keep it? </h3>
         <a href='/user/<%= session._id%>/edit'>Update your interests 'NO'</a> <br>
         <a href='/user/<%= session._id%>/news'>See the ranking of your favourite topic 'YES'</a>
+          <%} else {%>
+            <h3>Welcome back <%= session.userFirstName %>, You're an ADMIN User.
+            <a href='/admin/'>Upload News</a>
 
-        <%}%>
+            <h3>Last time, you selected <%= session.interest %> as your favourite topic, Wanna keep it? </h3>
+            <a href='/user/<%= session._id%>/edit'>Update your interests 'NO'</a> <br>
+            <a href='/user/<%= session._id%>/news'>See the ranking of your favourite topic 'YES'</a> </h3>
+
+          <%}}%>
 
   </div>
 </div>
