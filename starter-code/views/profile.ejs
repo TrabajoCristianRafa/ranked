@@ -1,3 +1,7 @@
+<ul>
+  <li> <a href="/auth/logout"> Log Out </a> </li>
+</ul>
+
 <div class="row">
   <div class="col-xs-12 col-sm-6 col-sm-offset-3">
     <%  if (session.interest === undefined){%>
@@ -15,7 +19,7 @@
         <a href='/user/<%= session._id%>/edit'>Update your interests 'NO'</a> <br>
         <a href='/user/<%= session._id%>/news'>See the ranking of your favourite topic 'YES'</a>
           <%} else {%>
-            <h3>Welcome back <%= session.userFirstName %>, You're an ADMIN User.
+            <h3>Welcome back <%= session.userFirstName %>, You're an ADMIN User. </h3> <br>
             <a href='/admin/'>Upload News</a>
 
             <h3>Last time, you selected <%= session.interest %> as your favourite topic, Wanna keep it? </h3>

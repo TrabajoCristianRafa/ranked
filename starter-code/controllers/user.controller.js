@@ -1,4 +1,5 @@
 const User = require('../models/user.model');
+const News = require('../models/news.model');
 const INTEREST_TYPES = require('../models/interest-types');
 const mongoose = require('mongoose');
 
@@ -25,5 +26,11 @@ module.exports.doUpdateInterests = (req, res, next) => {
 }
 
 module.exports.showNews = function(req, res, next){
-  res.render('news');
+  let userInterests = req.user.interest;
+  News.find({topic: userInterests}).sort({ retweet: 1 }).limit(5)
+    .then(result => {
+      res.render('news', {
+        news: result
+      }); 
+    })
 }
