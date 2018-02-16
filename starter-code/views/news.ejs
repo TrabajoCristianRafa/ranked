@@ -2,8 +2,10 @@
   <li> <a href="/auth/logout"> Log Out </a> </li>
 </ul>
 
-<% news.forEach(function(singleNew) { %>
-  <h2> <%= singleNew.comment %> </h2>
 
-  <h2> The sentiment score is: <%= singleNew.sentimentScore%> </h2>
+
+<% news.forEach(function(singleNew) { %>
+  <h3> <%= singleNew.comment %> </h3>
+
+  <h3> The sentiment score is: <%= singleNew.sentimentScore%> </h3>
 <% }) %>
