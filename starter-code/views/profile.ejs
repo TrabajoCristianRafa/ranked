@@ -4,55 +4,55 @@
 
 
 
-  <div class="container my-auto text-center">
-    <!-- <div class="row"> -->
-      <div class="col-lg-10 mx-auto">
-         <%  if (session.interest === undefined){%>
-           <!-- NUEVO USUARIO, MENSAJE-->
-           <h2>Welcome <%= session.userFirstName %>,</h2> <br>
-             <p>Select your favourite topic and <strong>start posting</strong>!</p>
-             <div class="row justify-content-center">
-           <form action='/user/<%= session._id%>' method='post'>
-              <input type="radio" name="interest" value="Bitcoin"><br> I like Bitcoin<br>
-              <input type="radio" name="interest" value="Seo"><br> I like Seo<br>
-              <input type="submit" value="Submit">
+<div class="container my-auto text-center">
+  <!-- <div class="row"> -->
+  <div class="col-lg-10 mx-auto">
+    <%  if (session.interest === undefined){%>
+      <!-- NUEVO USUARIO, MENSAJE-->
+      <h2>Welcome <%= session.userFirstName %>,</h2> <br>
+      <p>Select your favourite topic and <strong>start posting</strong>!</p>
+      <div class="row justify-content-center">
+        <form action='/user/<%= session._id%>' method='post'>
+          <input type="radio" name="interest" value="Bitcoin"><br> I like Bitcoin<br>
+          <input type="radio" name="interest" value="Seo"><br> I like Seo<br>
+          <input type="submit" value="Submit">
 
-           </form>
-           </div>
-           <% } else {%>
-             <!-- VIEJO USUARIO, MENSAJE-->
-             <% if(session.role !== 'ADMIN') {%>
-             <h2>Welcome back <%= session.userFirstName %>, </h2> <br>
-              <p>You selected <strong><%= session.interest %></strong> as your favourite topic. Wanna keep it? </p>
-              <div class="row justify-content-center">
-                <div class="col-4">
-                  <div class="row justify-content-center">
-                      <img src="/images/boton-no.png" alt="no">
-                      <div class="row">
-                        <a href='/user/<%= session._id%>/edit'>Update your interests 'NO'</a>
-                      </div>
-                  </div>
-
-                </div>
-                <div class="col-4">
-                  <div class="row justify-content-center">
-                      <img src="/images/boton-yes.png" alt="yes">
-                      <div>
-                        <a href='/user/<%= session._id%>/news'>See the ranking of your favourite topic 'YES'</a>
-                      </div>
-                  </div>
-                </div>
-              </div>
-        </div>
-               <%} else {%>
-                 <h3>Welcome back <%= session.userFirstName %>, You're an ADMIN User. </h3> <br>
-                 <a href='/admin/'>Upload News</a>
-
-                 <h3>Last time, you selected <%= session.interest %> as your favourite topic, Wanna keep it? </h3>
-                 <a href='/user/<%= session._id%>/edit'>Update your interests 'NO'</a> <br>
-                 <a href='/user/<%= session._id%>/news'>See the ranking of your favourite topic 'YES'</a> </h3>
-
-               <%}}%>
-
-       </div>
+        </form>
       </div>
+      <% } else {%>
+        <!-- VIEJO USUARIO, MENSAJE-->
+        <% if(session.role !== 'ADMIN') {%>
+          <div class="index-subtitle">
+
+          <h2>Welcome back <%= session.userFirstName %>, </h2> <br>
+
+        </div>
+
+          </div>
+          <p>You selected <strong><%= session.interest %></strong> as your favourite topic. Wanna keep it? </p>
+          <div class="row justify-content-center">
+            <div class="col-4">
+              <div class="row justify-content-center">
+                <a href='/user/<%= session._id%>/news'>  <img src="/images/thumbup.png" width= "108px" height= "180px" alt="yes"></a>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="row justify-content-center">
+                <a href='/user/<%= session._id%>/edit'> <img src="/images/thumbdown.png" width= "108px" height="180px" alt="no"></a>
+              </div>
+
+            </div>
+          </div>
+  </div>
+  <%} else {%>
+    <h3>Welcome back <%= session.userFirstName %>, You're an ADMIN User. </h3> <br>
+    <a href='/admin/'>Upload News</a>
+
+    <h3>Last time, you selected <%= session.interest %> as your favourite topic, Wanna keep it? </h3>
+    <a href='/user/<%= session._id%>/edit'>Update your interests 'NO'</a> <br>
+    <a href='/user/<%= session._id%>/news'>See the ranking of your favourite topic 'YES'</a> </h3>
+
+    <%}}%>
+
+</div>
+</div>

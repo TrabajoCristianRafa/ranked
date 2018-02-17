@@ -10,9 +10,11 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const passport = require('passport')
 const sentiment = require('sentiment')
+const twitter = require('twitter')
 
 require('./db.config');
 require('./passport.config').setup(passport);
+require('./twitter.config');
 
 module.exports = (app) => {
   app.set('views', path.join(__dirname, '../views'));
