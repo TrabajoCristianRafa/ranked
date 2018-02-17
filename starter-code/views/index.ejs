@@ -1,21 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <h2>Start your session with linkedin</h2>
-    <div class="col-xs-6 col-sm-4 col-sm-offset-4">
 
-    <form class="oauth-login" action="auth/linkedin" method="post">
-      <div class="form-actions">
-    <button type="submit" class='btn btn-block btn-primary'>
-       <i class="fab fa-linkedin-in"></i>Signup with LinkedIn</button>
-    </form>
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
 
+<body>
+
+  <div class="masthead text-center text-white d-flex">
+    <div class="container my-auto">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+          <h1 class="index-title">
+            Posting cool stuff was never so easy
+          </h1>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-lg-8 mx-auto index-subtitle">
+          <p class="text-faded mb-5"><strong>Discover all the social media news about your interests and become an influencer with us. Ranked is a new concept of creating contents, and it is also very easy to use: Just sing up with linkedIn and you will start creating contents in less than a minute!</strong></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 text-center mx-auto">
+          <form class="oauth-login" action="auth/linkedin" method="post">
+            <div class="form-actions">
+              <button type="submit" class='btn btn-block btn-primary'>
+            Sign up with LinkedIn</button>
+          </form>
+          </div>
+        </div>
+      </div>
     </div>
-  </body>
+    </div>
+  </div>
+
+</body>
+
 </html>

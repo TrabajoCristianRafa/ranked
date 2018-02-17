@@ -21,3 +21,9 @@ module.exports.loginWithProviderCallback = (req, res, next) => {
       }
     })(req, res, next);
 }
+
+module.exports.logout = (req, res, next) => {
+  console.log("Estoy en el controller")
+  req.logout();
+  res.redirect('/');
+}

@@ -9,6 +9,8 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const passport = require('passport')
+const sentiment = require('sentiment')
+
 require('./db.config');
 require('./passport.config').setup(passport);
 
