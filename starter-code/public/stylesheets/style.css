@@ -13,7 +13,7 @@ a {
 
 .index-title {
   color: #cd5b56;
-  margin-top: 200px;
+  margin-top: 20%;
   font-family: 'Righteous', cursive;
 }
 
@@ -34,4 +34,17 @@ a {
 
 .list-group-item .fa-linkedin {
   margin-right: 9px;
+}
+
+.btn {
+  background-color: #46668c;
+}
+
+.news-view {
+  font-family: 'Source Code Pro', monospace;
+  color: #ac544c;
+  font-size: 10px;
+  text-align: center;
+  vertical-align: middle;
+
 }
