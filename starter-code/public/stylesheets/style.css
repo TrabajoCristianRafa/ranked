@@ -13,15 +13,15 @@ a {
 
 .index-title {
   color: #cd5b56;
-  margin-top: 20%;
-  font-family: "Righteous", cursive;
+  margin-top: 15%;
+  font-family: 'Righteous', cursive;
 }
 
 .index-subtitle {
   color: #5b7a9b;
-  margin-top: 40px;
-  font-family: "Didact Gothic", sans-serif;
-  font-size: 20px;
+  margin-top: 30px;
+  font-family: 'Didact Gothic', sans-serif;
+  font-size: 20px
 }
 
 p {
@@ -53,4 +53,9 @@ p {
 
 .posting-btn {
   margin-left: 50%;
+}
+
+.logo {
+  margin-left: 43.5%;
+  margin-top: 8%;
 }
