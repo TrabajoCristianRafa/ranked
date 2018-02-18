@@ -33,8 +33,6 @@ module.exports.doUpdateInterests = (req, res, next) =>  {
 
 module.exports.showNews = (req, res, next) => {
   let userInterest = req.user.interest
-  console.log(req.user)
-  console.log(req.session)
 
   News.collection.drop()
 
@@ -56,6 +54,9 @@ module.exports.showNews = (req, res, next) => {
       })
 
       tweets.forEach((t) => {
+        console.log(t.entities.urls[0])
+        console.log(t.text.length)
+        console.log(t.text)
         let {
           score
         } = sentiment(t.text);
@@ -75,12 +76,13 @@ module.exports.showNews = (req, res, next) => {
           .then(function(savedTweet) {
             if (t === tweets[tweets.length - 1]) {
               console.log("last")
+              console.log(tweets)
 
               News.find({
-                topic: params.screen_name
-              }).sort({
-                retweet: 1
-              }).limit(5)
+                  topic: params.screen_name
+                }).sort({
+                  retweet: 1
+                }).limit(5)
                 .then((result) => {
                   res.render("news", {
                     news: result
@@ -96,66 +98,4 @@ module.exports.showNews = (req, res, next) => {
       });
     }
   });
-  //     News.find({
-  //         topic: params.screen_name
-  //       }).sort({
-  //         retweet: 1
-  //       }).limit(5)
-  //       .then(result => {
-  //         res.render('news', {
-  //           news: result
-  //         });
-  //       })
-  //   }
-  // })
 }
-
-//
-// module.exports.showNews = (req, res, next) => {
-//   const Twitter = require('twitter')
-//   const client = new Twitter({
-//     consumer_key: 'AoWrlLiQYrYP3PV5KGSR1lDqA',
-//     consumer_secret: '0mjFjAtVgRXmHKp03QxoZp88zWOY53uhGbY2FWtP6B3FXI2EWP',
-//     access_token_key: '962764760067473409-IKGVHHWB86pnOoMTl72WblCLwbQcOZG',
-//     access_token_secret: 'i5v49tA4CEy99uV3Krzz47e9mYVZchXvoYGbB4OvnUsoA'
-//   });
-//   const params = {
-//     screen_name: 'Bitcoin'
-//   };
-//   client.get('statuses/user_timeline', params, function(error, tweets, response) {
-//     if (!error) {
-//       for (i = 0; i < tweets.length; i++) {
-//         if (typeof tweets[i].entities.urls[0] !== "undefined" &&
-//           !tweets[i].entities.urls[0].expanded_url.includes("twitter.com")) {
-//           let {
-//             score
-//           } = sentiment(tweets[i].text);
-//           const tweet = new News();
-//           tweet.comment = tweets[i].text;
-//           tweet.topic = params.screen_name;
-//           tweet.userName = tweets[i].user.name;
-//           tweet.url = tweets[i].entities.urls[0].expanded_url;
-//           tweet.retweet = tweets[i].retweet_count;
-//           tweet.sentimentScore = score
-//           tweet.save()
-//             .then((tweet) => {
-//               News.find({
-//                   topic: params.screen_name
-//                 }).sort({
-//                   retweet: 1
-//                 }).limit(5)
-//                 .then(result => {
-//                   console.log("ESTO ES UN ERROR")
-//                   res.render('news', {
-//                     news: result
-//                   });
-//                 })
-//             })
-//             .catch(error => {
-//               next(error)
-//             })
-//         }
-//       }
-//     }
-//   });
-// }
