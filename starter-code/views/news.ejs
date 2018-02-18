@@ -2,12 +2,38 @@
   <li> <a href="/auth/logout"> Log Out </a> </li>
 </ul>
 
-<div class="news-view">
+<div class="class=container my-auto text-center">
+  <div class="col-lg-10 mx-auto">
 
-<% news.forEach(function(singleNew) { %>
-  <h3> <%= singleNew.comment %> </h3>
-  <h3> <%= singleNew.url %> </h3>
-  <h3> The sentiment score is: <%= singleNew.sentimentScore%> </h3>
-<% }) %>
+    <div class="index-subtitle">
+      <h2>These are the best selected <strong><%= session.interest %></strong> tweets: </h2>
+      <br>
+    </div>
+  </div>
+</div>
+
+    <% news.forEach(function(singleNew) { %>
+
+<div class="container card custom-card">
+
+  <div class="card-title">
+    <h3> <%= singleNew.comment %> </h3>
+  </div>
+
+  <div class="card-subtitle">
+    <p> The sentiment score is: <%= singleNew.sentimentScore%> </p>
+  </div>
+
+  <div class="card-footer row">
+    <a href="<%= singleNew.url %>" class="card-link" target="_blank">Click to read more info</a>
+    <div class="posting-btn">
+      <form action = "" method = "post">
+        <input type="submit" name="Post Linkedin" value="Publish it on Linkedin!" />
+      </form>
+    </div>
+
+  </div>
 
 </div>
+<br>
+<% }) %>
