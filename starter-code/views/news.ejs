@@ -25,10 +25,11 @@
   </div>
 
   <div class="card-footer row">
+
     <a href="<%= singleNew.url %>" class="card-link" target="_blank">Click to read more info</a>
     <div class="posting-btn">
-      <form action = "" method = "post">
-        <input type="submit" name="Post Linkedin" value="Publish it on Linkedin!" />
+      <form action = "/user/<%= session._id%>/linkedin" method = "post" id="prueba">
+        <button type="submit" form="prueba" name="_id" value="<%= singleNew._id %>"> Click to read more! </button>
       </form>
     </div>
 

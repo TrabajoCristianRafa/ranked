@@ -1,8 +1,11 @@
 const User = require('../models/user.model');
 const News = require('../models/news.model');
+const LinkedinReq = require('../models/linkedinreq.model');
 const INTEREST_TYPES = require('../models/interest-types');
 const mongoose = require('mongoose');
 const sentiment = require('sentiment')
+const request = require('superagent');
+
 
 module.exports.updateInterests = (req, res, next) => {
   res.render('interests', {
@@ -54,17 +57,11 @@ module.exports.showNews = (req, res, next) => {
       })
 
       tweets.forEach((t) => {
-        console.log(t.entities.urls[0])
-        console.log(t.text.length)
-        console.log(t.text)
         let {
           score
         } = sentiment(t.text);
         const tweet = new News();
         let success = t.retweet_count + t.favorite_count
-        console.log(t.retweet_count)
-        console.log(t.favorite_count)
-        console.log(success)
         tweet.comment = t.text;
         tweet.topic = params.screen_name;
         tweet.userName = t.user.name;
@@ -75,9 +72,6 @@ module.exports.showNews = (req, res, next) => {
         tweet.save()
           .then(function(savedTweet) {
             if (t === tweets[tweets.length - 1]) {
-              console.log("last")
-              console.log(tweets)
-
               News.find({
                   topic: params.screen_name
                 }).sort({
@@ -89,7 +83,6 @@ module.exports.showNews = (req, res, next) => {
                   })
                 });
             } else {
-              console.log("noop")
             }
           })
           .catch(error => {
@@ -98,4 +91,49 @@ module.exports.showNews = (req, res, next) => {
       });
     }
   });
+}
+
+module.exports.shareOnLinkedIn = (req, res, next) => {
+console.log(req.body)
+let selectedNewsId = req.body._id
+console.log(selectedNewsId)
+News.find({
+    _id: selectedNewsId
+  }).then((result) => {
+    var textToPost = "Hola, despues enlace: " + result[0].url
+    const linkedinreq = new LinkedinReq()
+    linkedinreq.comment = textToPost
+    linkedinreq.save()
+      .then(result => {
+        let linkedinData = {
+          comment: result.comment,
+          visibility: result.visibility,
+        }
+        const accessToken = res.locals.session.accessToken;
+        request.post('https://api.linkedin.com/v1/people/~/shares?format=json')
+        .send(linkedinData)
+        .set('Authorization', `Bearer ${accessToken}`)
+        // Header Authorization
+        // http headers
+        // protocolo http status codes
+        // CORS
+        // CSRF
+        // CSP
+        .set('Content-Type', 'application/json')
+        .set('x-li-format', 'json')
+        .then(linkResponse => {
+          console.log('Linkedin nos dice quee..... =>')
+          console.log(linkResponse.body.updateUrl)
+        })
+        .catch(err => {
+            console.log('FALLO EN LINKEDIN =>')
+            console.log(err);
+        });
+      })
+      .catch(error => {
+        next(error)
+      })
+  })
+;
+
 }
