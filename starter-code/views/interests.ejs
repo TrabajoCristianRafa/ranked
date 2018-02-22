@@ -11,15 +11,16 @@
 
 
   <% interestTypes.forEach((interest) => {%>
-    <%  console.log(session)%>
-      <input type="radio" name="interest" value="<%= interest %>" <%= session.interest === interest ? 'checked' : '' %>>I like
+    <%  console.log(interest)%>
+      <input type="radio" name="interest" value="<%= interest %>" <%= session.interest === interest ? 'checked' : '' %>><br>
       <%= interest %><br>
         <% })%>
-
-          <input type="submit" value="Submit">
-
-
+  <br>
+  <button type="submit" name="">Send Interest</button>
+      <!-- <input type="submit" value=""> -->
 </form>
+
+<h4><a href="/user/<%= session._id%>/search">Or enter your own interest:</a></h4>
 </div>
 
 </div>

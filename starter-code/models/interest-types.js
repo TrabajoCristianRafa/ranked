@@ -1,5 +1,9 @@
 
 module.exports = [
   "Bitcoin",
-  "Seo"
+  "Seo",
+  "Lakers",
+  "Tinder",
+  "Trump",
+  "nba"
 ]

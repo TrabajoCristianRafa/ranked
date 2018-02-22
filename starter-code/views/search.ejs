@@ -1,0 +1,17 @@
+<ul>
+  <li> <a href="/auth/logout"> Log Out </a> </li>
+</ul>
+
+<div class="container my-auto text-center">
+  <div class="col-lg-10 mx-auto">
+
+    <h2>I'm going to post about:</h2>
+    <div class="row justify-content-center">
+      <form action='/user/<%= session._id%>' method="post">
+        <input type="text" name="interest">
+        <button type="submit" name="">Send Interest</button>
+      </form>
+    </div>
+
+  </div>
+</div>
