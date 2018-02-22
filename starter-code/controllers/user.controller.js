@@ -5,6 +5,7 @@ const INTEREST_TYPES = require('../models/interest-types');
 const mongoose = require('mongoose');
 const sentiment = require('sentiment')
 const request = require('superagent');
+const COMMENT_TYPES = require('./comments-types.js');
 
 
 module.exports.updateInterests = (req, res, next) => {
@@ -36,6 +37,7 @@ module.exports.doUpdateInterests = (req, res, next) =>  {
 
 module.exports.showNews = (req, res, next) => {
   let userInterest = req.user.interest
+  console.log(COMMENT_TYPES[1])
 
   News.collection.drop()
 
@@ -94,13 +96,14 @@ module.exports.showNews = (req, res, next) => {
 }
 
 module.exports.shareOnLinkedIn = (req, res, next) => {
-console.log(req.body)
+let maxComments = COMMENT_TYPES.length
+let randomNumber = Math.floor(Math.random() * maxComments) + 0
 let selectedNewsId = req.body._id
-console.log(selectedNewsId)
+
 News.find({
     _id: selectedNewsId
   }).then((result) => {
-    var textToPost = "Hola, despues enlace: " + result[0].url
+    var textToPost = COMMENT_TYPES[randomNumber] + result[0].url
     const linkedinreq = new LinkedinReq()
     linkedinreq.comment = textToPost
     linkedinreq.save()

@@ -12,7 +12,7 @@
 
   <% interestTypes.forEach((interest) => {%>
     <%  console.log(session)%>
-      <input type="radio" name="interest" value="<%= interest %>" <%= session.interest === interest ? 'checked' : '' %>><br>I like
+      <input type="radio" name="interest" value="<%= interest %>" <%= session.interest === interest ? 'checked' : '' %>>I like
       <%= interest %><br>
         <% })%>
 

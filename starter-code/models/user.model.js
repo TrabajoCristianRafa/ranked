@@ -8,11 +8,9 @@ const ROLE_GUEST = 'GUEST'
 const userSchema = new mongoose.Schema({
   linkedinName: {
     type: String,
-    // required: [true, 'User is required']
   },
   linkedinId: {
     type: String,
-    // required: [true, 'LinkedinId is requiried']
   },
   interest: {
     type: String,
@@ -40,26 +38,3 @@ userSchema.virtual('userFirstName').get(function() {
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
-
-
-
-
-
-
-
-
-
-// userSchema.pre('save', function(next) {
-//   const user = this;
-//
-//   if (user.isAdmin()) {
-//     user.role = 'ADMIN'
-//   }
-//   console.log('Imprimo user dentro del modelo en pre')
-//   console.log(user)
-//   next();
-// })
-//
-// userSchema.methods.isAdmin = function() {
-//   return this.linkedinFirstName === 'Ranked Project' || this.role === ROLE_ADMIN
-// }
