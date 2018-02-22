@@ -42,8 +42,6 @@ module.exports.doUpdateInterests = (req, res, next) => {
 module.exports.showNews = (req, res, next) => {
   let userInterest = req.user.interest;
 
-  News.collection.drop();
-
   const Twitter = require("twitter");
   const client = new Twitter({
     consumer_key: "AoWrlLiQYrYP3PV5KGSR1lDqA",
@@ -67,42 +65,51 @@ module.exports.showNews = (req, res, next) => {
         );
       });
 
-      tweets.forEach(t => {
-        let { score } = sentiment(t.text);
-        const tweet = new News();
-        let success = t.retweet_count + t.favorite_count;
-        tweet.comment = t.text;
-        tweet.topic = params.screen_name;
-        tweet.userName = t.user.name;
-        tweet.url = t.entities.urls[0].expanded_url;
-        tweet.retweet = success;
-        tweet.sentimentScore = score;
+      if (tweets.length !== 0){
+        News.collection.drop();
+        tweets.forEach(t => {
+          let { score } = sentiment(t.text);
+          const tweet = new News();
+          let success = t.retweet_count + t.favorite_count;
+          tweet.comment = t.text;
+          tweet.topic = params.screen_name;
+          tweet.userName = t.user.name;
+          tweet.url = t.entities.urls[0].expanded_url;
+          tweet.retweet = success;
+          tweet.sentimentScore = score;
 
-        tweet
-          .save()
-          .then(function(savedTweet) {
-            if (t === tweets[tweets.length - 1]) {
-              News.find({
-                topic: params.screen_name
-              })
-                .sort({
-                  retweet: 1
+          tweet
+            .save()
+            .then(function(savedTweet) {
+              if (t === tweets[tweets.length - 1]) {
+                News.find({
+                  topic: params.screen_name
                 })
-                .limit(5)
-                .then(result => {
-                  res.render("news", {
-                    news: result
+                  .sort({
+                    retweet: 1
+                  })
+                  .limit(5)
+                  .then(result => {
+                    res.render("news", {
+                      news: result
+                    });
                   });
-                });
-            } else {
-            }
-          })
-          .catch(error => {
-            next(error);
-          });
-      });
+              } else {
+              }
+            })
+            .catch(error => {
+              next(error);
+            });
+        }); 
     }
-  });
+  };
+
+
+  }
+
+
+
+
 };
 
 module.exports.shareOnLinkedIn = (req, res, next) => {
