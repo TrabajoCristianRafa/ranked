@@ -10,14 +10,9 @@
     <%  if (session.interest === undefined){%>
       <!-- NUEVO USUARIO, MENSAJE-->
       <h2>Welcome <%= session.userFirstName %>,</h2> <br>
-      <p>Select your favourite topic and <strong>start posting</strong>!</p>
       <div class="row justify-content-center">
         <form action='/user/<%= session._id%>' method='post'>
-          <input type="radio" name="interest" value="Bitcoin"><br>Bitcoin<br>
-          <input type="radio" name="interest" value="Seo"><br>Seo<br>
-          <!-- <input type="submit" value="Submit"> -->
-          <br>
-          <h4>Or enter your own interest:</h4>
+          <h4>What do you want to post about?</h4>
           <br><input type="text" name="custominterest">
 
           <button type="submit" name="">Send Interest</button>

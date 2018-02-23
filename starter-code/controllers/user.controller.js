@@ -9,50 +9,7 @@ const COMMENT_TYPES = require('./comments-types.js');
 
 
 module.exports.updateInterests = (req, res, next) => {
-  let validTypes = [];
-  let iterations = 0
-  INTEREST_TYPES.forEach(eachInterest => {
-    iterations = iterations + 1
-    const Twitter = require("twitter");
-    const client = new Twitter({
-      consumer_key: "AoWrlLiQYrYP3PV5KGSR1lDqA",
-      consumer_secret: "0mjFjAtVgRXmHKp03QxoZp88zWOY53uhGbY2FWtP6B3FXI2EWP",
-      access_token_key: "962764760067473409-IKGVHHWB86pnOoMTl72WblCLwbQcOZG",
-      access_token_secret: "i5v49tA4CEy99uV3Krzz47e9mYVZchXvoYGbB4OvnUsoA"
-    });
-    const params = {
-      screen_name: eachInterest
-    };
-    client.get("statuses/user_timeline", params, function(
-      error,
-      tweets,
-      response
-    ) {
-      if (!error) {
-        tweets = tweets.filter(tweet => {
-          return (
-            typeof tweet.entities.urls[0] !== "undefined" &&
-            !tweet.entities.urls[0].expanded_url.includes("twitter.com")
-          );
-        });
-
-        if (tweets.length !== 0) {
-          console.log(validTypes)
-          validTypes.push(eachInterest)
-        } else {
-          console.log("no hay suficientes posts")
-        }
-      };
-    })
-  })
-  if ((iterations) === INTEREST_TYPES.length) {
-    console.log(iterations)
-    console.log(INTEREST_TYPES.length)
-    res.render("interests", {
-      interestTypes: validTypes
-    })
-    console.log(interestTypes)
-  }
+  res.render("search")
 };
 
 module.exports.searchInterests = (req, res, next) => {
@@ -104,14 +61,15 @@ module.exports.showNews = (req, res, next) => {
     tweets,
     response
   ) {
+    console.log(tweets)
     if (!error) {
+
       tweets = tweets.filter(tweet => {
         return (
           typeof tweet.entities.urls[0] !== "undefined" &&
           !tweet.entities.urls[0].expanded_url.includes("twitter.com")
         );
       });
-
 
       if (tweets.length !== 0) {
         News.collection.drop();
@@ -120,6 +78,7 @@ module.exports.showNews = (req, res, next) => {
             score
           } = sentiment(t.text);
           const tweet = new News();
+
           let success = t.retweet_count + t.favorite_count;
           tweet.comment = t.text;
           tweet.topic = params.screen_name;
@@ -127,7 +86,6 @@ module.exports.showNews = (req, res, next) => {
           tweet.url = t.entities.urls[0].expanded_url;
           tweet.retweet = success;
           tweet.sentimentScore = score;
-
           tweet
             .save()
             .then(function(savedTweet) {
