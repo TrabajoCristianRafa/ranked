@@ -48,6 +48,9 @@ module.exports = (app) => {
 
   app.use((req, res, next) => {
     res.locals.session = req.user;
+    if(res.locals.session) {
+      res.locals.session.accessToken = req.session && req.session.accessToken
+    }
     next();
   })
 }

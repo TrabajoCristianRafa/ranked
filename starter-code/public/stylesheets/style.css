@@ -9,6 +9,7 @@ body {
 
 a {
   color: #00b7ff;
+ text-decoration: none;
 }
 
 .index-title {
@@ -30,6 +31,11 @@ p {
   font-size: 18px;
 }
 
+h4{
+  font-family: "Didact Gothic", sans-serif;
+  font-size: 13px;
+}
+
 .oauth-login + .oauth-login {
   margin-top: 10px;
 }
@@ -44,18 +50,69 @@ p {
 
 .btn {
   background-color: #46668c;
-}
-
-.custom-card {
-  font-family: "Source Code Pro", monospace;
-  color: #ac544c;
-}
-
-.posting-btn {
-  margin-left: 50%;
+  color: white;
 }
 
 .logo {
   margin-left: 43.5%;
   margin-top: 8%;
+}
+
+.container-cards{
+  margin-top: 50px;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.card{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: auto;
+  list-style: none;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  justify-content: space-around;
+  margin-bottom: 15px;
+  border: none;
+}
+
+.card-text{
+  padding: 10px;
+  width: 100%;
+  background-color:#fcf4e4;
+  padding: 5px;
+  text-align: left;
+  padding-left: 20px;
+  font-family: Helvetica,Arial,sans-serif;
+  color: #bc584c;
+  border-bottom: 1px solid;
+  border-color: #e0ac9c;
+}
+
+.card-no-text{
+    align-items: center;
+    width: 100%;
+    background-color: #fcf4e4;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.btn-red{
+  background-color: #ce5554
+}
+
+.button-logout{
+ display: inline-flex;
+ background-color: red;
+}
+
+.btn-logout{
+margin-left:45%;
+color: white;
+text-decoration: none;
 }

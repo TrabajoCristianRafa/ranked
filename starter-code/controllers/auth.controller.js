@@ -7,7 +7,7 @@ module.exports.profile = (req, res, next) => {
 }
 
 module.exports.loginWithProviderCallback = (req, res, next) => {
-    passport.authenticate('linkedin-auth', (error, user) => {
+    passport.authenticate('linkedin-auth' ,(error, user) => {
       if(error) {
           next(error);
       } else {

@@ -27,27 +27,25 @@ module.exports.setup = (passport) => {
       clientID: '78frd5p2p2moyo',
       clientSecret: 'E2CNvuddqixrfDMy',
       callbackURL: "http://127.0.0.1:3000/auth/linkedin/callback",
-      scope: ['r_basicprofile', 'r_emailaddress'],
+      scope: ['r_basicprofile', 'r_emailaddress', 'w_share'],
       passReqToCallback: true
     },
     function(req, accessToken, refreshToken, profile, done) {
+      console.log('Acepto los permisos y entro al callback')
+      console.log(refreshToken)
       req.session.accessToken = accessToken;
       process.nextTick(function() {
-        console.log(profile)
         User.findOne({
             'linkedinId': profile.id
           })
           .then(user => {
             if (user) {
-
               console.log('El usuario existe');
               done(null, user);
             } else {
               const newUser = new User();
               newUser.linkedinName = profile.displayName;
               newUser.linkedinId = profile.id;
-              console.log('imprimo newUser =>')
-              console.log(newUser)
               newUser.save()
                 .then((user) => {
                   done(null, user);

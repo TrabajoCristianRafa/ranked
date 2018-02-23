@@ -1,10 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const adminControllers = require('../controllers/admin.controller');
-const adminCheck = require('../middleware/admin.middleware');
+const adminControllers = require("../controllers/admin.controller");
+const adminCheck = require("../middleware/admin.middleware");
 
-
-router.get('/', adminCheck.isAdmin , adminControllers.adminHome);
+router.get("/", adminCheck.isAdmin, adminControllers.adminHome);
 // router.post('/', adminCheck.isAdmin, adminControllers.uploadNews);
 // router.post('/', adminCheck.isAdmin, adminControllers.twitterNews);
 // router.get('/update-news', adminControllers.updateAllNews);
