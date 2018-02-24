@@ -3,23 +3,27 @@ const User = require('../models/user.model');
 const passport = require('passport');
 
 module.exports.profile = (req, res, next) => {
-  res.render('profile');
+  if (typeof req.user.interest === "undefined") {
+    res.render('search')
+  } else {
+    res.render('profile')
+  }
 }
 
 module.exports.loginWithProviderCallback = (req, res, next) => {
-    passport.authenticate('linkedin-auth' ,(error, user) => {
-      if(error) {
+  passport.authenticate('linkedin-auth', (error, user) => {
+    if (error) {
+      next(error);
+    } else {
+      req.login(user, (error) => {
+        if (error) {
           next(error);
-      } else {
-        req.login(user, (error) => {
-          if (error) {
-            next(error);
-          } else {
-            res.redirect('profile');
-          }
-        });
-      }
-    })(req, res, next);
+        } else {
+          res.redirect('profile');
+        }
+      });
+    }
+  })(req, res, next);
 }
 
 module.exports.logout = (req, res, next) => {

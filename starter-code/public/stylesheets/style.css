@@ -7,22 +7,24 @@ body {
   background-repeat: no-repeat;
 }
 
-a {
-  color: #00b7ff;
- text-decoration: none;
+a, a:link, a:visited, a:active, a:hover {
+  color: white;
+  text-decoration: none;
 }
+
 
 .index-title {
   color: #cd5b56;
   margin-top: 15%;
   font-family: 'Righteous', cursive;
+  font-size: 45px
 }
 
 .index-subtitle {
   color: #5b7a9b;
   margin-top: 30px;
   font-family: 'Didact Gothic', sans-serif;
-  font-size: 20px
+  font-size: 30px
 }
 
 p {
@@ -31,12 +33,12 @@ p {
   font-size: 18px;
 }
 
-h4{
+h4 {
   font-family: "Didact Gothic", sans-serif;
   font-size: 13px;
 }
 
-.oauth-login + .oauth-login {
+.oauth-login+.oauth-login {
   margin-top: 10px;
 }
 
@@ -51,6 +53,7 @@ h4{
 .btn {
   background-color: #46668c;
   color: white;
+
 }
 
 .logo {
@@ -58,13 +61,20 @@ h4{
   margin-top: 8%;
 }
 
-.container-cards{
-  margin-top: 50px;
-  max-height: 400px;
-  overflow-y: scroll;
+.container-cards {
+  max-height: 350px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
 
-.card{
+.container-content{
+  height: 345px;
+  width:60%;
+  overflow: auto;
+}
+
+.card {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -78,41 +88,90 @@ h4{
   border: none;
 }
 
-.card-text{
+.card-text {
   padding: 10px;
   width: 100%;
-  background-color:#fcf4e4;
+  background-color: #fcf4e4;
   padding: 5px;
   text-align: left;
   padding-left: 20px;
-  font-family: Helvetica,Arial,sans-serif;
-  color: #bc584c;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #5c75a4;
   border-bottom: 1px solid;
   border-color: #e0ac9c;
 }
 
-.card-no-text{
-    align-items: center;
-    width: 100%;
-    background-color: #fcf4e4;
-    padding: 10px;
-    text-align: center;
-    display: flex;
-    justify-content: space-around;
-
+.card-no-text {
+  align-items: center;
+  width: 100%;
+  background-color: #fcf4e4;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
 }
 
-.btn-red{
-  background-color: #ce5554
+.btn-red {
+  background-color: #ce5554;
+  color: white;
+  text-decoration: none;
 }
 
-.button-logout{
- display: inline-flex;
- background-color: red;
+footer{
+position: fixed;
+bottom: 80px;
 }
 
-.btn-logout{
-margin-left:45%;
-color: white;
-text-decoration: none;
+.btn-logout {
+  position: fixed;
+  bottom: 50;
+  margin-left: 80%;
+  color: white;
+  text-decoration: none;
+  background-color: #93a3b2;
+}
+
+.button-read{
+  color: white;
+  text-decoration: none;
+  background-color: #ce5554;
+  display:flex;
+  height: 40px;
+  width: 120px;
+ align-items: center;
+ justify-content: center;
+ border-radius: 5px;
+}
+
+.red{
+  color: #ce5554
+}
+
+.hands-container{
+  display: flex;
+  justify-content: center;
+}
+
+.hand-left{
+margin-right: 10px
+}
+
+.hand-right{
+margin-left: 10px
+}
+
+.container-form{
+  display: flex;
+  justify-content: center;
+}
+
+.form-input{
+ height: 40px;
+ border: 2px solid white;
+ padding: 10px;
+ border-radius: 25px;
+}
+
+.news-title{
+  margin-top: 100px
 }

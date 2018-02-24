@@ -9,7 +9,9 @@ const COMMENT_TYPES = require('./comments-types.js');
 
 
 module.exports.updateInterests = (req, res, next) => {
-  res.render("search")
+  res.render("search",{
+    data: "data"
+  })
 };
 
 module.exports.searchInterests = (req, res, next) => {
@@ -61,7 +63,6 @@ module.exports.showNews = (req, res, next) => {
     tweets,
     response
   ) {
-    console.log(tweets)
     if (!error) {
 
       tweets = tweets.filter(tweet => {
@@ -109,7 +110,9 @@ module.exports.showNews = (req, res, next) => {
             });
         });
       } else {
-        res.render("search")
+        res.render("search", {
+          data: "nodata"
+        })
       }
     };
   })
