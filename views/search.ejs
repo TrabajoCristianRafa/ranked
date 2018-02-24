@@ -1,0 +1,20 @@
+<div class="container my-auto text-center">
+  <div class="col-lg-10 mx-auto">
+    <%  if (session.interest === undefined){%>
+      <h2 class="index-title">Welcome <%= session.userFirstName %>!</h2><br>
+      <h3 class="index-subtitle">What do you want to post about?</h3> <br>
+      <%  } else if (data === "nodata"){%>
+        <h2 class="index-title">Sorry...</h2><br>
+        <h3 class="index-subtitle"> We didn't find anything about <strong class="red"><%= session.interest %></strong> today, try another topic!</h3> <br>
+        <%} else {%>
+          <h2 class="index-title"><strong class="red"><%= session.interest %></strong> is cool</h2><br>
+          <h3 class="index-subtitle">but today I'd rather post about:</h3> <br>
+          <%}%>
+            <div class="container-form row">
+              <form action='/user/<%= session._id%>' method="post">
+                <input type="text" class="form-input" name="interest" placeholder="Search...">
+                <button type="submit" class="btn btn-primary mb-2">Send Interest</button>
+              </form>
+            </div>
+  </div>
+</div>

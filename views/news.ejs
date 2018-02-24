@@ -1,0 +1,33 @@
+<div class="container my-auto text-center">
+  <div class="col-lg-10 mx-auto">
+    <div class="index-subtitle news-title">
+      <h2>These are the best selected <strong class="red"><%= session.interest %></strong> tweets: </h2>
+      <br>
+    </div>
+  </div>
+</div>
+
+
+<ul class="container-cards">
+  <div class="container-content">
+    <% news.forEach(function(singleNew) { %>
+      <li class="card">
+        <div class="card-text">
+          <h4> <%= singleNew.comment %> </h4>
+        </div>
+        <div class="card-no-text">
+          <a target="_blank" href="<%= singleNew.url %>" class="button-read">Read the post!</a>
+          <p> Sentiment score:
+            <%= singleNew.sentimentScore%>
+          </p>
+          <div class="posting-btn">
+            <form action="/user/<%= session._id%>/linkedin" method="post" id="prueba">
+              <button type="submit" class="btn" form="prueba" name="_id" value="<%= singleNew._id %>"> Publish it on LinkedIn! </button>
+            </form>
+          </div>
+        </div>
+      </li>
+      <% }) %>
+        <br>
+  </div>
+</ul>

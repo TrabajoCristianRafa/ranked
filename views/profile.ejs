@@ -1,0 +1,17 @@
+<div class="container my-auto text-center">
+  <div class="col-lg-10 mx-auto">
+
+    <div class="index-subtitle">
+      <h2 class="index-title">Welcome back <%= session.userFirstName %> </h2> <br>
+    </div>
+  </div>
+  <h3 class="index-subtitle">You selected <strong class="red"><%= session.interest %></strong> as your favourite topic. Wanna keep it? </h3>
+  <div class="row justify-content-center hands-container">
+      <div class="hand-left">
+        <a href='/user/<%= session._id%>/news'>  <img src="/images/thumbup.png" width= "108px" height= "180px" alt="yes"></a>
+      </div>
+      <div class="hand-right">
+        <a href='/user/<%= session._id%>/edit'> <img src="/images/thumbdown.png" width= "108px" height="180px" alt="no"></a>
+      </div>
+  </div>
+</div>
