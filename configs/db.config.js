@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const DB_NAME = 'ranked';
-const MONGO_URI = `mongodb://localhost/${DB_NAME}`;
+const MONGO_URI = process.env.MONGO_URI;
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URI)
