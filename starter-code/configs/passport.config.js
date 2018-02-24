@@ -24,8 +24,8 @@ module.exports.setup = (passport) => {
   })
 
   passport.use('linkedin-auth', new LinkedInStrategy({
-      clientID: '78frd5p2p2moyo',
-      clientSecret: 'E2CNvuddqixrfDMy',
+      clientID: LINKEDIN_CLIENT_ID,
+      clientSecret: LINKEDIN_CLIENT_SECRET,
       callbackURL: "http://127.0.0.1:3000/auth/linkedin/callback",
       scope: ['r_basicprofile', 'r_emailaddress', 'w_share'],
       passReqToCallback: true

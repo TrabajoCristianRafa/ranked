@@ -45,15 +45,18 @@ module.exports.doUpdateInterests = (req, res, next) => {
 
 
 module.exports.showNews = (req, res, next) => {
-
   let userInterest = req.user.interest;
-
   const Twitter = require("twitter");
+  const TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY;
+  const TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET;
+  const TWITTER_ACCESS_TOKEN_KEY = process.env.TWITTER_ACCESS_TOKEN_KEY;
+  const TWITTER_ACCESS_TOKEN_SECRET = process.env.TWITTER_ACCESS_TOKEN_SECRET;
+
   const client = new Twitter({
-    consumer_key: "AoWrlLiQYrYP3PV5KGSR1lDqA",
-    consumer_secret: "0mjFjAtVgRXmHKp03QxoZp88zWOY53uhGbY2FWtP6B3FXI2EWP",
-    access_token_key: "962764760067473409-IKGVHHWB86pnOoMTl72WblCLwbQcOZG",
-    access_token_secret: "i5v49tA4CEy99uV3Krzz47e9mYVZchXvoYGbB4OvnUsoA"
+    consumer_key: TWITTER_CONSUMER_KEY,
+    consumer_secret: TWITTER_CONSUMER_SECRET,
+    access_token_key: TWITTER_ACCESS_TOKEN_KEY,
+    access_token_secret: TWITTER_ACCESS_TOKEN_SECRET
   });
   const params = {
     screen_name: userInterest
@@ -64,14 +67,12 @@ module.exports.showNews = (req, res, next) => {
     response
   ) {
     if (!error) {
-
       tweets = tweets.filter(tweet => {
         return (
           typeof tweet.entities.urls[0] !== "undefined" &&
           !tweet.entities.urls[0].expanded_url.includes("twitter.com")
         );
       });
-
       if (tweets.length !== 0) {
         News.collection.drop();
         tweets.forEach(t => {
@@ -79,7 +80,6 @@ module.exports.showNews = (req, res, next) => {
             score
           } = sentiment(t.text);
           const tweet = new News();
-
           let success = t.retweet_count + t.favorite_count;
           tweet.comment = t.text;
           tweet.topic = params.screen_name;
@@ -140,12 +140,6 @@ module.exports.shareOnLinkedIn = (req, res, next) => {
           .post("https://api.linkedin.com/v1/people/~/shares?format=json")
           .send(linkedinData)
           .set("Authorization", `Bearer ${accessToken}`)
-          // Header Authorization
-          // http headers
-          // protocolo http status codes
-          // CORS
-          // CSRF
-          // CSP
           .set("Content-Type", "application/json")
           .set("x-li-format", "json")
           .then(linkResponse => {
