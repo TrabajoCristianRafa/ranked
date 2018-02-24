@@ -1,58 +1,17 @@
-<ul>
-  <li> <a href="/auth/logout"> Log Out </a> </li>
-</ul>
-
-
-
 <div class="container my-auto text-center">
-  <!-- <div class="row"> -->
   <div class="col-lg-10 mx-auto">
-    <%  if (session.interest === undefined){%>
-      <!-- NUEVO USUARIO, MENSAJE-->
-      <h2>Welcome <%= session.userFirstName %>,</h2> <br>
-      <div class="row justify-content-center">
-        <form action='/user/<%= session._id%>' method='post'>
-          <h4>What do you want to post about?</h4>
-          <br><input type="text" name="custominterest">
 
-          <button type="submit" name="">Send Interest</button>
-
-        </form>
-      </div>
-      <% } else {%>
-        <!-- VIEJO USUARIO, MENSAJE-->
-        <% if(session.role !== 'ADMIN') {%>
-          <div class="index-subtitle">
-
-          <h2>Welcome back <%= session.userFirstName %>, </h2> <br>
-
-        </div>
-
-          </div>
-          <p>You selected <strong><%= session.interest %></strong> as your favourite topic. Wanna keep it? </p>
-          <div class="row justify-content-center">
-            <div class="col-4">
-              <div class="row justify-content-center">
-                <a href='/user/<%= session._id%>/news'>  <img src="/images/thumbup.png" width= "108px" height= "180px" alt="yes"></a>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="row justify-content-center">
-                <a href='/user/<%= session._id%>/edit'> <img src="/images/thumbdown.png" width= "108px" height="180px" alt="no"></a>
-              </div>
-
-            </div>
-          </div>
+    <div class="index-subtitle">
+      <h2 class="index-title">Welcome back <%= session.userFirstName %> </h2> <br>
+    </div>
   </div>
-  <%} else {%>
-    <h3>Welcome back <%= session.userFirstName %>, You're an ADMIN User. </h3> <br>
-    <a href='/admin/'>Upload News</a>
-
-    <h3>Last time, you selected <%= session.interest %> as your favourite topic, Wanna keep it? </h3>
-    <a href='/user/<%= session._id%>/edit'>Update your interests 'NO'</a> <br>
-    <a href='/user/<%= session._id%>/news'>See the ranking of your favourite topic 'YES'</a> </h3>
-
-    <%}}%>
-
-</div>
+  <h3 class="index-subtitle">You selected <strong class="red"><%= session.interest %></strong> as your favourite topic. Wanna keep it? </h3>
+  <div class="row justify-content-center hands-container">
+      <div class="hand-left">
+        <a href='/user/<%= session._id%>/news'>  <img src="/images/thumbup.png" width= "108px" height= "180px" alt="yes"></a>
+      </div>
+      <div class="hand-right">
+        <a href='/user/<%= session._id%>/edit'> <img src="/images/thumbdown.png" width= "108px" height="180px" alt="no"></a>
+      </div>
+  </div>
 </div>

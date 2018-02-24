@@ -8,8 +8,7 @@ const request = require('superagent');
 const COMMENT_TYPES = require('./comments-types.js');
 
 module.exports.index = (req, res, next) => {
-
   res.render('index', {
-    title: "Ranked"
+    title: "Ranked",
   })
 }
