@@ -154,6 +154,7 @@ module.exports.shareOnLinkedIn = (req, res, next) => {
           .catch(err => {
             console.log("FALLO EN LINKEDIN =>");
             console.log(err);
+            next(err);
           });
       })
       .catch(error => {
