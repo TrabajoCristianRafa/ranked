@@ -1,10 +1,11 @@
 const User = require('../models/user.model');
 const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
-
+const callUrl = require('./enviroment.config')
 const DEFAULT_USERNAME = 'anonymous ironhacker'
 
 const LINKEDIN_CLIENT_ID = process.env.LINKEDIN_CLIENT_ID || '';
 const LINKEDIN_CLIENT_SECRET = process.env.LINKEDIN_CLIENT_SECRET || '';
+
 
 
 const LINKEDIN_PROVIDER = 'linkedin';
@@ -26,7 +27,7 @@ module.exports.setup = (passport) => {
   passport.use('linkedin-auth', new LinkedInStrategy({
       clientID: LINKEDIN_CLIENT_ID,
       clientSecret: LINKEDIN_CLIENT_SECRET,
-      callbackURL: "http://127.0.0.1:3000/auth/linkedin/callback",
+      callbackURL: `${callUrl()}/auth/linkedin/callback`,
       scope: ['r_basicprofile', 'r_emailaddress', 'w_share'],
       passReqToCallback: true
     },
