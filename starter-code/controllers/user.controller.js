@@ -151,6 +151,11 @@ module.exports.shareOnLinkedIn = (req, res, next) => {
           .then(linkResponse => {
             console.log("Linkedin nos dice quee..... =>");
             console.log(linkResponse.body.updateUrl);
+            setTimeout(function () {
+              res.render("posted", {
+                url: linkResponse.body.updateUrl
+              })
+            }, 2000);
           })
           .catch(err => {
             console.log("FALLO EN LINKEDIN =>");

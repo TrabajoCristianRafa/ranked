@@ -56,11 +56,6 @@ h4 {
 
 }
 
-.logo {
-  margin-left: 43.5%;
-  margin-top: 8%;
-}
-
 .container-cards {
   max-height: 350px;
   overflow: hidden;
@@ -70,7 +65,7 @@ h4 {
 
 .container-content{
   height: 345px;
-  width:60%;
+  width:90%;
   overflow: auto;
 }
 
@@ -174,4 +169,19 @@ margin-left: 10px
 
 .news-title{
   margin-top: 100px
+}
+
+.post-link{
+  text-decoration: none;
+  color: #5f42f4;
+}
+
+.post-link:hover {
+    text-decoration: none;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
 }
